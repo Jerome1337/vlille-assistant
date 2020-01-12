@@ -1,0 +1,9 @@
+logs
+*.log
+npm-debug.log*
+firebase-debug.log*
+.firebase/
+build/Release
+node_modules/
+.npm
+.env
