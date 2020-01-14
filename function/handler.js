@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
-import { dialogflow, SimpleResponse } from 'actions-on-google';
+const fetch = require('node-fetch');
+const { dialogflow, SimpleResponse } = require('actions-on-google');
 
 const app = dialogflow({ debug: true });
 
