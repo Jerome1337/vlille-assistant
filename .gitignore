@@ -7,3 +7,6 @@ build/Release
 node_modules/
 .npm
 .env
+
+template
+build
