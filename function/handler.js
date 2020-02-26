@@ -29,12 +29,22 @@ module.exports = (context, callback) => {
     },
   };
 
-  let { google } = responseObject.payload
-  let { textToSpeech } = google.richResponse.items[0].simpleResponse;
+  let { textToSpeech } = responseObject.payload.google.richResponse.items[0].simpleResponse;
 
   if (input && input.queryResult) {
     switch (input.queryResult.intent.displayName) {
       case 'welcome':
+        responseObject.payload.google.systemIntent = {
+          "intent": "actions.intent.PERMISSION",
+          "data": {
+            "@type": "type.googleapis.com/google.actions.v2.PermissionValueSpec",
+            "optContext": "To address you by name and know your location",
+            "permissions": [
+              "NAME",
+              "DEVICE_PRECISE_LOCATION"
+            ]
+          }
+        };
         textToSpeech = "Bonjour, que voulez-vous demander à l'assistant V'lille ?";
         break;
       case 'disponibility':
@@ -45,11 +55,11 @@ module.exports = (context, callback) => {
       default:
         textToSpeech = 'Raté ! Je ne comprend pas ce que vous dites.';
     }
-
-    responseObject.fulfillmentText = textToSpeech;
   } else {
     textToSpeech = 'Unable to parse the input. Function may be out of date';
   }
+
+  responseObject.fulfillmentText = textToSpeech;
 
   callback(undefined, responseObject);
 };
