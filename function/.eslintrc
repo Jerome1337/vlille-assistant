@@ -1,7 +1,7 @@
 {
   "extends": "airbnb",
   "rules": {
-    "func-names": ["error", "never"]
+    "func-names": ["error", "never"],
+    "max-len": ["error", 120]
   }
 }
-
